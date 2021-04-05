@@ -5,7 +5,7 @@ type PropertyValidationSchema = Joi.Schema | Joi.Schema[];
 
 export function mustBe(propertyValidationSchema: PropertyValidationSchema) {
   // eslint-disable-next-line func-names
-  return function (target: Record<string, unknown>, propertyKey: string) {
+  return function (target: any, propertyKey: string) {
     // eslint-disable-next-line prefer-rest-params
     if (getArgumentsLength(arguments) > 2) {
       throw new Error(decoratorIsForPropertiesOnly(propertyKey))

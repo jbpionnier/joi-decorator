@@ -1,6 +1,6 @@
 {
   "name": "joi-decorator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Decorator based interface for Joi",
   "author": "Jean-Baptiste Pionnier",
   "license": "MIT",
