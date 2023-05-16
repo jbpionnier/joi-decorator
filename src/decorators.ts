@@ -1,7 +1,5 @@
-import * as Joi from 'joi'
-import { METADATA_KEY } from './constants'
+import { METADATA_KEY, PropertyValidationSchema } from './constants'
 
-type PropertyValidationSchema = Joi.Schema | Joi.Schema[];
 
 export function mustBe(propertyValidationSchema: PropertyValidationSchema) {
   // eslint-disable-next-line func-names
@@ -17,17 +15,16 @@ export function mustBe(propertyValidationSchema: PropertyValidationSchema) {
     )
     if (metadataMap === undefined) {
       metadataMap = new Map<string, PropertyValidationSchema>()
-    }
-    if (metadataMap.has(propertyKey)) {
+      Reflect.defineMetadata(
+        METADATA_KEY.VALIDATION_RULES,
+        metadataMap,
+        constructor,
+      )
+    } else if (metadataMap.has(propertyKey)) {
       throw new Error(decoratorCanOnlyBeAppliedOnce(propertyKey))
     }
 
     metadataMap.set(propertyKey, propertyValidationSchema)
-    Reflect.defineMetadata(
-      METADATA_KEY.VALIDATION_RULES,
-      metadataMap,
-      constructor,
-    )
   }
 }
 
