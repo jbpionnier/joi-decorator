@@ -17,27 +17,27 @@ import { mustBe, a } from "joi-decorator";
 
 export class User {
     @mustBe(a.string().alphanum().min(3).max(30).required())
-    public username: string;
+    username: string
     @mustBe(a.string().regex(/^[a-zA-Z0-9]{3,30}$/))
-    public password: string;
+    password: string
     @mustBe([a.string(), a.number()])
-    public accessToken: string|number;
+    accessToken: string | number
     @mustBe(a.number().integer().min(1900).max(2013))
-    public birthyear: number;
+    birthyear: number
     @mustBe(a.string().email())
-    public email: string;
-    public constructor(
+    email: string
+    constructor(
         username: string,
         password: string,
-        access_token: string|number,
+        access_token: string | number,
         birthyear: number,
         email: string
     ) {
-        this.username = username;
-        this.password = password;
-        this.accessToken = accessToken;
-        this.birthyear = birthyear;
-        this.email = email;
+        this.username = username
+        this.password = password
+        this.accessToken = accessToken
+        this.birthyear = birthyear
+        this.email = email
     }
 }
 ```
@@ -48,10 +48,9 @@ Then you can validate the entity instances:
 
 ```ts
 import { validate } from "joi-decorator";
-import { expect } from "chai";
 import {  User } from "./entities/user";
 
-const validUser = new User(
+const userInput = new User(
     "root",
     "secret",
     "token",
@@ -59,8 +58,7 @@ const validUser = new User(
     "test@test.com"
 );
 
-const result1 = validate(validUser);
-expect(result1.error).to.eql(null);
+const userValid = validate(userInput);
 ```
 
 ---
