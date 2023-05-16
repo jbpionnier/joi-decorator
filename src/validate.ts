@@ -5,7 +5,7 @@ interface Type<T = any> extends Function {
   new(...args: any[]): T
 }
 
-export async function validate<T>(instance: T, clss: Type<T>, options: Joi.ValidationOptions = {}): Promise<any> {
+export function validate<T>(instance: T, clss: Type<T>, options: Joi.ValidationOptions = {}): unknown {
   const metadata = Reflect.getMetadata(METADATA_KEY.VALIDATION_RULES, clss)
   if (metadata == null) {
     return instance
